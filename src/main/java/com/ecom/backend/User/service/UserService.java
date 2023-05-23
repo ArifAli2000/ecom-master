@@ -2,7 +2,7 @@ package com.ecom.backend.User.service;
 
 import com.ecom.backend.product.exception.ResourceNotFoundException;
 import com.ecom.backend.User.model.User;
-import com.ecom.backend.User.payload.UserDto;
+import com.ecom.backend.User.dto.UserDto;
 import com.ecom.backend.User.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

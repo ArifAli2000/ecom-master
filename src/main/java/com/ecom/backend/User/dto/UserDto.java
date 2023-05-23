@@ -1,5 +1,6 @@
-package com.ecom.backend.User.payload;
+package com.ecom.backend.User.dto;
 
+import com.ecom.backend.common.AbstractEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,8 +8,8 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class UserDto {
-    private String userId;
+public class UserDto extends AbstractEntity {
+
 
     private  String name;
 

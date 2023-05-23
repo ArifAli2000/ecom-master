@@ -26,7 +26,7 @@ public class EcomApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println(this.passwordEncoder.encode("zxcv12345"));
+		//System.out.println(this.passwordEncoder.encode("zxcv12345"));
 
 	}
 

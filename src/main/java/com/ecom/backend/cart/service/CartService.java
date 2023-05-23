@@ -33,11 +33,13 @@ public class CartService {
 
     public CartDto addItem(ItemRequest item, String username){
         String productId = item.getId();
+        System.out.println(productId);
         int quantity=item.getQuantity();
         //fetch user
-        User user = this.userRepo.findByemail(username).orElseThrow(()->new ResourceNotFoundException("User not found"));
+        User user = this.userRepo.findByEmail(username).orElseThrow(()->new ResourceNotFoundException("User not found"));
+
         //fetch Product
-        Product product = this.productRepo.findById(productId).orElseThrow(()->new ResourceNotFoundException("Product Not Found"));
+        Product product = this.productRepo.findById( productId).orElseThrow(()->new ResourceNotFoundException("Product Not Found"));
 
         //here we are checking product stock
         if(!product.isStock()){
@@ -96,6 +98,14 @@ public class CartService {
 
 
         return  this.modelMapper.map(saveCart,CartDto.class);
+        }
+
+        public CartDto getAllCart(String email){
+            // find user
+           User user = this.userRepo.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("User NOt Found"));
+           //find cart
+          Cart cart = this.cartRepo.findByUser(user).orElseThrow(() ->new ResourceNotFoundException("There is no cart"));
+           return this.modelMapper.map(cart,CartDto.class);
         }
 
 

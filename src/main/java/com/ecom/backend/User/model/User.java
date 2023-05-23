@@ -23,13 +23,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @Table(name = "user_info")
 public class User extends AbstractEntity implements UserDetails {
-//   @Id
-//    @GeneratedValue(generator = "UUID")
-//    @GenericGenerator(
-//            name = "UUID",
-//            strategy = "org.hibernate.id.UUIDGenerator"
-//    )
-    //private String userId;
+
     @Column(nullable = false)
     private  String name;
     @Column(unique = true,nullable = false)

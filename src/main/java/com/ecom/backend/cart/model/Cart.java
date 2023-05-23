@@ -21,7 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Cart extends AbstractEntity {
 
-    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cart",cascade = CascadeType.ALL,orphanRemoval = true)
     private Set<CartItem> items= new HashSet<>();
     @OneToOne
     private User user;

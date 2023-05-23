@@ -1,6 +1,6 @@
 package com.ecom.backend.User.controller;
 
-import com.ecom.backend.User.payload.UserDto;
+import com.ecom.backend.User.dto.UserDto;
 import com.ecom.backend.User.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ public class UserController {
     public ResponseEntity<UserDto> CreateUser(@RequestBody UserDto userDto){
         Date date =new Date();
         userDto.setDate(date);
-        System.out.println(userDto.getUserId());
+        System.out.println(userDto.getId());
         UserDto createUser = this.userService.createUser(userDto);
         return  new ResponseEntity<UserDto>(createUser, HttpStatus.CREATED);
     }
