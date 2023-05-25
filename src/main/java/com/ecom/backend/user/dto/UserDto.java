@@ -1,4 +1,4 @@
-package com.ecom.backend.User.dto;
+package com.ecom.backend.user.dto;
 
 import com.ecom.backend.common.AbstractEntity;
 import lombok.Getter;

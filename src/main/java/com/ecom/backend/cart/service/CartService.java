@@ -1,7 +1,7 @@
 package com.ecom.backend.cart.service;
 
-import com.ecom.backend.User.model.User;
-import com.ecom.backend.User.repository.UserRepository;
+import com.ecom.backend.user.model.User;
+import com.ecom.backend.user.repository.UserRepository;
 import com.ecom.backend.cart.dto.CartDto;
 import com.ecom.backend.cart.model.Cart;
 import com.ecom.backend.cart.model.CartItem;
@@ -32,7 +32,7 @@ public class CartService {
     private ModelMapper modelMapper;
 
     public CartDto addItem(ItemRequest item, String username){
-        String productId = item.getId();
+        String productId = item.getProductId();
         System.out.println(productId);
         int quantity=item.getQuantity();
         //fetch user

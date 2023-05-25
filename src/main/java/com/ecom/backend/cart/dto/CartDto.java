@@ -1,6 +1,6 @@
 package com.ecom.backend.cart.dto;
 
-import com.ecom.backend.User.dto.UserDto;
+import com.ecom.backend.user.dto.UserDto;
 import com.ecom.backend.common.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

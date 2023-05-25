@@ -1,6 +1,6 @@
-package com.ecom.backend.Role.model;
+package com.ecom.backend.role.model;
 
-import com.ecom.backend.User.model.User;
+import com.ecom.backend.user.model.User;
 import com.ecom.backend.common.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

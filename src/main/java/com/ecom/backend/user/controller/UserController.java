@@ -1,7 +1,7 @@
-package com.ecom.backend.User.controller;
+package com.ecom.backend.user.controller;
 
-import com.ecom.backend.User.dto.UserDto;
-import com.ecom.backend.User.service.UserService;
+import com.ecom.backend.user.dto.UserDto;
+import com.ecom.backend.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

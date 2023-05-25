@@ -39,7 +39,7 @@ public class ProductService {
         ProductDto dto   = toDto(save);
         return dto;
     }
-    public ProductResponse viewAll(int pageNumber,int pageSize,String sortBY,String sortDir){
+    public ProductResponse getAllProduct(int pageNumber,int pageSize,String sortBY,String sortDir){
          Sort sort = null;
         if(sortDir.trim().toLowerCase().equals("asc")) {
             sort = Sort.by(sortBY).ascending();
@@ -67,7 +67,7 @@ public class ProductService {
         // List<ProductDto> findAllDto = findAll.stream().map(product ->this.toDto(product)).collect(Collectors.toList());
         return response;
     }
-    public ProductDto viewProductById(String pid){
+    public ProductDto getProduct(String pid){
 
         Product  findById = productRepo.findById(pid).orElseThrow(() ->new ResourceNotFoundException(pid+ " from this product id product not found"));
         ProductDto dto = this.toDto(findById);

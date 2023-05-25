@@ -10,8 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemRequest extends Product{
-
+public class ItemRequest {
+    private String productId;
     private int quantity;
 
 }

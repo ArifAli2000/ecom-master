@@ -1,7 +1,7 @@
-package com.ecom.backend.User.model;
+package com.ecom.backend.user.model;
 
 
-import com.ecom.backend.Role.model.Role;
+import com.ecom.backend.role.model.Role;
 import com.ecom.backend.cart.model.Cart;
 import com.ecom.backend.common.AbstractEntity;
 import lombok.AllArgsConstructor;

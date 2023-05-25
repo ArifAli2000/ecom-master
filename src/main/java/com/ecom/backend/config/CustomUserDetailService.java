@@ -1,8 +1,8 @@
 package com.ecom.backend.config;
 
 
-import com.ecom.backend.User.model.User;
-import com.ecom.backend.User.repository.UserRepository;
+import com.ecom.backend.user.model.User;
+import com.ecom.backend.user.repository.UserRepository;
 import com.ecom.backend.product.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

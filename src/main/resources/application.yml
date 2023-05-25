@@ -17,8 +17,8 @@ spring:
   main:
     allow-circular-references: true
 
-#  security:
-#    user:
-#      name: Arif
-#      password: Arif123
+product:
+  path:
+   images: src/products/images
+
 

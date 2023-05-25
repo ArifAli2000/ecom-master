@@ -1,11 +1,12 @@
-package com.ecom.backend.User.service;
+package com.ecom.backend.user.service;
 
 import com.ecom.backend.product.exception.ResourceNotFoundException;
-import com.ecom.backend.User.model.User;
-import com.ecom.backend.User.dto.UserDto;
-import com.ecom.backend.User.repository.UserRepository;
+import com.ecom.backend.user.model.User;
+import com.ecom.backend.user.dto.UserDto;
+import com.ecom.backend.user.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -18,13 +19,22 @@ public class UserService {
     private UserRepository userRepo;
     @Autowired
     private ModelMapper mapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     //userDto to user
     public UserDto createUser(UserDto userDto){
-       User user = this.mapper.map(userDto, User.class);
+        User user = this.mapper.map(userDto, User.class);
+        String passEncode = this.passwordEncoder.encode(user.getPassword());
+        user.setPassword(passEncode);
         User saveUser = this.userRepo.save(user);
-       // user to userDto
-       UserDto saveUserDto = this.mapper.map(saveUser, UserDto.class);
+        UserDto saveUserDto = this.mapper.map(saveUser, UserDto.class);
         return saveUserDto;
+
+//       User user = this.mapper.map(userDto, User.class);
+//        User saveUser = this.userRepo.save(user);
+//       // user to userDto
+//       UserDto saveUserDto = this.mapper.map(saveUser, UserDto.class);
+//        return saveUserDto;
     }
     public UserDto getById(String Id){
        User findByuserId = this.userRepo.findById(Id).orElseThrow(() ->new ResourceNotFoundException("User not found by this id"+ Id));

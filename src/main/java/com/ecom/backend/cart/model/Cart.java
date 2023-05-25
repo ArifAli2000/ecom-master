@@ -1,6 +1,6 @@
 package com.ecom.backend.cart.model;
 
-import com.ecom.backend.User.model.User;
+import com.ecom.backend.user.model.User;
 import com.ecom.backend.common.AbstractEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

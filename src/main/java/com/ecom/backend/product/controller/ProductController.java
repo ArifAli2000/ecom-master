@@ -1,15 +1,19 @@
 package com.ecom.backend.product.controller;
 
+import com.ecom.backend.fileUpload.service.FileUpload;
 import com.ecom.backend.payload.AppConstants;
 import com.ecom.backend.payload.ProductResponse;
 import com.ecom.backend.product.dto.ProductDto;
 import com.ecom.backend.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
@@ -17,6 +21,31 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private FileUpload fileUpload;
+    @Value("${product.path.images}")
+     private String imagePath;
+
+    @PostMapping("/images/{productId}")
+    public ResponseEntity<?> uploadImageOfProduct(@PathVariable String productId,
+                                                 @RequestParam("product_image")MultipartFile file){
+       ProductDto product = this.productService.getProduct(productId);
+       String imageName = null;
+
+       try {
+          String uploadImage = this.fileUpload.uploadImage(imagePath,file);
+           product.setProduct_imageName(uploadImage);
+           System.out.println(product.getProduct_imageName());
+           ProductDto updateProduct = this.productService.updateProduct(productId,product);
+
+           return new ResponseEntity<>(updateProduct,HttpStatus.ACCEPTED);
+       }catch (Exception e){
+           e.printStackTrace();
+           return new ResponseEntity<>(Map.of("Message","File not upload in server"),HttpStatus.INTERNAL_SERVER_ERROR);
+       }
+
+
+    }
 
     //Add product
     @PostMapping("/{catid}")
@@ -32,7 +61,7 @@ public class ProductController {
      @RequestParam(value = "pageSize",defaultValue = AppConstants.PAGE_SIZE_STRING,required = false) int pageSize,
      @RequestParam(value = "sortBy",defaultValue = AppConstants.SORT_BY_STRING,required = false) String sortBy,
      @RequestParam(value = "sortDir",defaultValue = AppConstants.SORT_DIR_STRING,required = false) String sortDir ) {
-        ProductResponse response = productService.viewAll(pageNumber,pageSize,sortBy,sortDir);
+        ProductResponse response = productService.getAllProduct(pageNumber,pageSize,sortBy,sortDir);
       return response ;
     }
 
@@ -40,7 +69,7 @@ public class ProductController {
     @ResponseBody
     @GetMapping("/{productId}")
     public ResponseEntity<ProductDto> viewProductById(@PathVariable String productId){
-        ProductDto viewById = productService.viewProductById(productId);
+        ProductDto viewById = productService.getProduct(productId);
         return new ResponseEntity<ProductDto>(viewById,HttpStatus.OK);
     }
 
