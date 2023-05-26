@@ -6,6 +6,7 @@ import com.ecom.backend.payload.ItemRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -22,7 +23,7 @@ public class CartController{
         String email=principal.getName();
         System.out.println(email);
         CartDto addItem = this.cartService.addItem(itemRequest,principal.getName());
-//        System.out.println(principal.getName());
+        System.out.println(principal.getName());
         return new ResponseEntity<CartDto>(addItem, HttpStatus.OK);
     }
 
@@ -33,4 +34,18 @@ public class CartController{
        CartDto getAllCart = this.cartService.getAllCart(principal.getName());
         return new ResponseEntity<CartDto>(getAllCart,HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("{cartId}")
+    public ResponseEntity<CartDto> getCartById(@PathVariable String cartId){
+       CartDto cartById = this.cartService.getCartById(cartId);
+        return new ResponseEntity<CartDto>(cartById,HttpStatus.OK);
+    }
+
+    @DeleteMapping("{productId}")
+    public ResponseEntity<CartDto>deleteCartItemFromCart(@PathVariable String productId,Principal principal){
+
+        CartDto remove = this.cartService.removeCartItemFromCart(principal.getName(),productId);
+        return new ResponseEntity<CartDto>(remove,HttpStatus.UPGRADE_REQUIRED);
+    }
+
 }
