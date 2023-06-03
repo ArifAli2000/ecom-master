@@ -47,7 +47,7 @@ public class OrderService {
         Order order=new Order();
 
         AtomicReference<Double> totalOrderPrice= new AtomicReference<Double>(0.0);
-        Set<OrderItem>	orderitems=items.stream().map((cartItem)-> {
+        Set<OrderItem>	orderItems=items.stream().map((cartItem)-> {
             OrderItem orderItem=new OrderItem();
             //set cartItem into OrderItem
 
@@ -72,7 +72,7 @@ public class OrderService {
         order.setOrderStatus("CREATED");
         order.setPaymentStatus("NOT PAID");
         order.setUser(user);
-        order.setOrderItem(orderitems);
+        order.setOrderItem(orderItems);
         order.setOrderAmount(totalOrderPrice.get());
         order.setOrderCreateAt(new Date());
         Order save;
@@ -80,7 +80,6 @@ public class OrderService {
             save = this.orderReop.save(order);
             cart.getItems().clear();
             this.cartRepo.save(cart);
-            System.out.println("Hello");
         }else {
             System.out.println(order.getOrderAmount());
             throw new ResourceNotFoundException("Please Add to Cart First then place Order");
@@ -88,5 +87,15 @@ public class OrderService {
 
 
         return this.modelMapper.map(save,OrderDto.class);
+    }
+    public void cancelOrder(String orderId) {
+       Order order = this.orderReop.findById(orderId).orElseThrow(() ->new ResourceNotFoundException("Order not Found"));
+       this.orderReop.delete(order);
+    }
+
+    public OrderDto findById(String orderId){
+       Order order = this.orderReop.findById(orderId).orElseThrow(() ->new ResourceNotFoundException("Order not Found"));
+        return this.modelMapper.map(order,OrderDto.class);
+
     }
 }
