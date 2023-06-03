@@ -31,6 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeHttpRequests()
                 .antMatchers(HttpMethod.GET,"/products").permitAll()
+                .antMatchers(HttpMethod.GET,"/images/").permitAll()
                 .antMatchers("/users/**").permitAll()
                .antMatchers("/cart/**").permitAll()
                 .anyRequest()

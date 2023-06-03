@@ -16,7 +16,7 @@ public class OrderDto extends AbstractEntity {
     private String orderStatus;
     private String paymentStatus;
     private Date orderDelivered;
-    private double orderAmt;
+    private double orderAmount;
     private String billingAddress;
 
     private UserDto user;
